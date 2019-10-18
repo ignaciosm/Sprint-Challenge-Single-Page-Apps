@@ -2,6 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import CharacterCard from "./CharacterCard";
 import SearchForm from './SearchForm'
+import styled from 'styled-components'
+
+const CardWrapper = styled.section`
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+`;
 
 export default function CharacterList() {
 
@@ -36,13 +43,11 @@ export default function CharacterList() {
     <>
     <SearchForm characters={characters} searchCharacter={searchCharacter} />
 
-    <section className="character-list">
+    <CardWrapper className="character-list">
       {characters.map(character => (
-        <div key={character.id}>
         <CharacterCard key={character.id} character={character} />
-        </div>
       ))}
-    </section>
+    </CardWrapper>
     </>
   );
 }
