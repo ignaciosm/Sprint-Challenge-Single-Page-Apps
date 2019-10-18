@@ -14,6 +14,7 @@ export default function CharacterList() {
 
   const [characters, setCharacters] = useState([]);
   const [search, setSearch] = useState("");
+  const [filterTerm, setFilterTerm] = useState("");
 
   const searchCharacter = event => {
     event.preventDefault();
@@ -24,6 +25,15 @@ export default function CharacterList() {
   const searchURL = `https://rickandmortyapi.com/api/character/?name=${search}`
   console.log('searchURL',searchURL)
   
+  const filterCharacter = event => {
+    event.preventDefault();
+    setFilterTerm(event.target.value);
+  }
+  const filteredArray =  characters.filter(character => {
+    return character.name === filterTerm;
+  });
+
+console.log('filteredArray', filteredArray)
 
   useEffect(() => {
     axios
@@ -39,15 +49,32 @@ export default function CharacterList() {
     //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
   }, [searchURL]);
 
-  return (
-    <>
-    <SearchForm characters={characters} searchCharacter={searchCharacter} />
+  if (filteredArray.length === 0) {
+    return (
+      <>
+      <SearchForm characters={characters} searchCharacter={searchCharacter} filterCharacter={filterCharacter}/>
+  
+  
+      <CardWrapper className="character-list">
+        {characters.map(character => (
+          <CharacterCard key={character.id} character={character} />
+        ))}
+      </CardWrapper>
+      </>
+      )
+  }
 
-    <CardWrapper className="character-list">
-      {characters.map(character => (
-        <CharacterCard key={character.id} character={character} />
-      ))}
-    </CardWrapper>
-    </>
-  );
+  if (filteredArray) {
+    return (
+      <>
+      <SearchForm characters={characters} searchCharacter={searchCharacter} filterCharacter={filterCharacter}/>
+
+      <CardWrapper className="character-list">
+        {filteredArray.map(character => (
+          <CharacterCard key={character.id} character={character} />
+        ))}
+      </CardWrapper>
+      </>
+    );
+  }
 }

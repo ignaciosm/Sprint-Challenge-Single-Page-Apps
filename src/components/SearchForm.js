@@ -19,15 +19,30 @@ display: flex;
 
 export default function SearchForm(props) {
   return (
+    <>
+    <SearchContainer className="search-form">
+    {/* <form action=""> */}
+    <Search
+    type="text"
+    placeholder="Filter by exact name"
+    onChange={props.filterCharacter}
+    />
+    {/* <button type='submit'>Search now</button> */}
+    {/* </form> */}
+    </SearchContainer>
+
     <SearchContainer className="search-form">
            {/* <form action=""> */}
            <Search
             type="text"
-            placeholder="Find your favorite character"
+            placeholder="Seach your favorite character"
             onChange={props.searchCharacter}
           />
         {/* <button type='submit'>Search now</button> */}
       {/* </form> */}
     </SearchContainer>
+
+
+    </>
   );
 }
