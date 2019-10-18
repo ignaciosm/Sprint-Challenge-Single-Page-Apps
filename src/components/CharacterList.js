@@ -16,6 +16,7 @@ export default function CharacterList() {
 
   const searchURL = `https://rickandmortyapi.com/api/character/?name=${search}`
   console.log('searchURL',searchURL)
+  
 
   useEffect(() => {
     axios
@@ -23,34 +24,23 @@ export default function CharacterList() {
       // .get(`https://rickandmortyapi.com/api/character/`)
       .then(response => {
         setCharacters(response.data.results);
-        console.log('test', response.data.results)
       })
       .catch(error => {
         console.error('Server Error', error);
       });
     // TODO: Add API Request here - must run in `useEffect`
     //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
-  }, [search]);
+  }, [searchURL]);
 
-
-
-  console.log('characters', characters)
   return (
     <>
-    <section className="search">
-      {/* <form action=""> */}
-        <input
-            type="text"
-            placeholder="Search"
-            onChange={searchCharacter}
-          />
-        {/* <button type='submit'>Search now</button> */}
-      {/* </form> */}
-    </section>
+    <SearchForm characters={characters} searchCharacter={searchCharacter} />
 
     <section className="character-list">
       {characters.map(character => (
+        <div key={character.id}>
         <CharacterCard key={character.id} character={character} />
+        </div>
       ))}
     </section>
     </>
