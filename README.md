@@ -28,6 +28,7 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 - [ ]  Explain benefit(s) using `client-side routing`?
 
 > Answer:
+***Its when you do the defining which component to render via browser URLs but without making a new server connection, meaning, the page does not reload between routes, it is all preloaded at the initial server call and then it just uses the dom to show the selected component.***
 
 ## Project Set Up
 
