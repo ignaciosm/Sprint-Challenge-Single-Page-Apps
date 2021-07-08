@@ -1,10 +1,48 @@
-import React, { useState } from "react";
+import React from "react";
+import styled from 'styled-components'
 
-export default function SearchForm() {
- 
+const Search = styled.input`
+padding: 0.5rem;
+margin: 0.5rem auto;
+color: ${props => props.inputColor || "palevioletred"};
+background: papayawhip;
+border: none;
+border-radius: 3px;
+align-self: center;
+font-size: 1.2rem;
+width: 50%;
+`;
+
+const SearchContainer = styled.section`
+display: flex;
+`;
+
+export default function SearchForm(props) {
   return (
-    <section className="search-form">
-     // Add a search form here
-    </section>
+    <>
+    <SearchContainer className="search-form">
+    {/* <form action=""> */}
+    <Search
+    type="text"
+    placeholder="Filter by exact name"
+    onChange={props.filterCharacter}
+    />
+    {/* <button type='submit'>Search now</button> */}
+    {/* </form> */}
+    </SearchContainer>
+
+    <SearchContainer className="search-form">
+           {/* <form action=""> */}
+           <Search
+            type="text"
+            placeholder="Seach your favorite character"
+            onChange={props.searchCharacter}
+          />
+        {/* <button type='submit'>Search now</button> */}
+      {/* </form> */}
+    </SearchContainer>
+
+
+    </>
   );
 }
